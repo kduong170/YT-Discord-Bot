@@ -102,7 +102,7 @@ async def play(client):
     else:
         await client.send('ytvid has nothing to pause!')
         
-@bot.command(help = 'Plays vid provided url')
+@bot.command(help = 'Plays vid provided url or searches on Youtube using keywords in quotes')
 async def str(client, url):
 #Plays from a url (almost anything youtube_dl supports)
     async with client.typing():
