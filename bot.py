@@ -7,11 +7,11 @@ import random
 bot = commands.Bot(command_prefix='!', intents = discord.Intents.all())
 discord.opus.load_opus('/opt/homebrew/Cellar/opus/1.3.1/lib/libopus.0.dylib')
 
+# Reads bot token from text file
 fileOpen = open('token.txt', 'r')
 token = fileOpen.readline()
 fileOpen.close()
 
-#////////////////////////////////////////////////
 # Suppress noise about console usage from errors
 youtube_dl.utils.bug_reports_message = lambda: ''
 
@@ -57,7 +57,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
 
         filename = data['url'] if stream else ytdl.prepare_filename(data)
         return cls(discord.FFmpegPCMAudio(filename,executable = '/Library/Frameworks/Python.framework/Versions/3.11/bin/ffmpeg', **ffmpeg_options), data=data)
-#////////////////////////////////////////
+
 @bot.event
 async def on_ready():
     print(f'Logged in as {bot.user} (ID: {bot.user.id})')
@@ -102,7 +102,6 @@ async def play(client):
     else:
         await client.send('ytvid has nothing to pause!')
         
-#/////////////////////////////////////////////////
 @bot.command(help = 'Plays vid provided url')
 async def str(client, url):
 #Plays from a url (almost anything youtube_dl supports)
@@ -111,7 +110,6 @@ async def str(client, url):
         client.voice_client.play(player, after=lambda e: print(f'Player error: {e}') if e else None)
 
     await client.send(f'Now playing: {player.title}')
-#//////////////////////////////////////////////////////
 
 @str.before_invoke
 async def ensure_voice(client):
